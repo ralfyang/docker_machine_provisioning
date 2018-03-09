@@ -1,6 +1,11 @@
 # docker_machine_provisioning
 
 ## How to install
+```
+curl -sL bit.ly/dockerM > ./mgmt.sh && chmod +x ./mgmt.sh
+sudo mv ./mgmt.sh /usr/local/bin/
+
+```
 
 ## How to use
 ```

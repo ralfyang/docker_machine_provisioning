@@ -67,22 +67,35 @@ remove(){
 application_install(){
 	mkdir -p ~/tmp
         cd ~/tmp
+  	arch=`uname -s`-`uname -m`
+	os=`uname -s`
 
-        ## VirtualBox Download & Install
-        VirtualBox_installer="http://download.virtualbox.org/virtualbox/5.2.2/VirtualBox-5.2.2-119230-OSX.dmg"
-        VirtualBox_file=$(echo "$VirtualBox_installer" | awk -F'/' '{print $NF}')
-        wget $VirtualBox_installer
-        sudo hdiutil attach $VirtualBox_file
-        sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /
-        hdiutil unmount /Volumes/VirtualBox/
-        rm -f ./$VirtualBox_file
+  	case $os in
+    	Linux)
+      		## VirtualBox install
+      		sudo apt-add-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
+      		wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+      		sudo apt-get update
+      		sudo apt-get install virtualbox  -y
+   		;;
 
+    	Darwin)
+            	## VirtualBox Download & Install
+            	VirtualBox_installer="http://download.virtualbox.org/virtualbox/5.2.2/VirtualBox-5.2.2-119230-OSX.dmg"
+            	VirtualBox_file=$(echo "$VirtualBox_installer" | awk -F'/' '{print $NF}')
+            	wget $VirtualBox_installer
+            	sudo hdiutil attach $VirtualBox_file
+            	sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /
+            	hdiutil unmount /Volumes/VirtualBox/
+            	rm -f ./$VirtualBox_file
+	    	;;
+    	esac
+  
 	## Install Referece by http://www.sauru.so/blog/provision-docker-node-with-docker-machine
 	gh="https://github.com"
 	gh_raw="https://raw.githubusercontent.com"
 	repo="docker/machine"
 	version="v0.14.0"
-	arch=`uname -s`-`uname -m`
 	
 	# now it is standard exec path for users.
 	mkdir -p $HOME/.local/bin $HOME/.bash_completion.d/

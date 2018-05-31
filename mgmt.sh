@@ -20,7 +20,7 @@ sshkey_check(){
 Base_cmd="/usr/local/bin/docker-machine"
 
 $Base_cmd 2> /tmp/chk_perm
-	if [[ $(grep Permsission /tmp/chk_perm) != "" ]];then
+	if [[ $(grep Permission /tmp/chk_perm) != "" ]];then
 		eacho " Please run with 'sudo' as below"
 		eacho " 'sudo mgmt.sh'"
 		rm -f /tmp/chk_perm

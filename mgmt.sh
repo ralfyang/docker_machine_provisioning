@@ -104,7 +104,7 @@ application_install(){
 	curl -fsSL -o $HOME/.local/bin/docker-machine \
 	        $gh/$repo/releases/download/$version/docker-machine-$arch
 	chmod +x $HOME/.local/bin/docker-machine
-	sudo cp -f /Users/RalfYang/.local/bin/docker-machine /usr/local/bin/docker-machine
+	sudo cp -f $HOME/.local/bin/docker-machine /usr/local/bin/docker-machine
 }
 
 clear

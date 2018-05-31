@@ -75,7 +75,7 @@ application_install(){
       		## VirtualBox install
       		sudo apt-add-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
       		#wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-		wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+		curl -sL https://www.virtualbox.org/download/oracle_vbox_2016.asc -o oracle_vbox.asc && sudo apt-key add oracle_vbox.asc
       		sudo apt-get update
       		sudo apt-get install virtualbox-5.2  -y
    		;;
@@ -84,7 +84,7 @@ application_install(){
             	## VirtualBox Download & Install
             	VirtualBox_installer="http://download.virtualbox.org/virtualbox/5.2.2/VirtualBox-5.2.2-119230-OSX.dmg"
             	VirtualBox_file=$(echo "$VirtualBox_installer" | awk -F'/' '{print $NF}')
-            	wget $VirtualBox_installer
+            	curl -sL $VirtualBox_installer -o $VirtualBox_file
             	sudo hdiutil attach $VirtualBox_file
             	sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /
             	hdiutil unmount /Volumes/VirtualBox/
